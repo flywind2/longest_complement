@@ -15,7 +15,7 @@ def complement(s):
   return ''.join([rev[x] for x in s])
 
 def of_interest(s):
-  if s == len(s) * s[0]:
+  if 'N' in s or s == len(s) * s[0]:
       return False
   else:
       return True
@@ -35,9 +35,9 @@ for linenum, line in enumerate(sys.stdin):
   while position + SEED <= current_start + len(current):
     block = current[position - current_start:position - current_start + SEED]
     if of_interest(block):
-      if block in seeds:
-        sys.stdout.write('{0},{1}\n'.format(position, ','.join([ str(x) for x in seeds[block]])))
       complemented = complement(block)
+      if block in seeds:
+        sys.stdout.write('{0} {1}:{2} {3}\n'.format(block, position, ','.join([ str(x) for x in seeds[block]]), complemented))
       if complemented in seeds:
         seeds[complemented].add(position)
       else:
