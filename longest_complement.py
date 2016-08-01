@@ -31,7 +31,7 @@ for linenum, line in enumerate(sys.stdin):
   if linenum % 100000 == 0:
     log('read {0} lines...'.format(linenum))
   
-  current += line.strip()
+  current += line.strip().upper()
   while position + SEED <= current_start + len(current):
     block = current[position - current_start:position - current_start + SEED]
     if of_interest(block):
